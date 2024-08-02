@@ -64,7 +64,7 @@ func (controller *PizzasController) Update(ctx *gin.Context) {
 	pizzaId := ctx.Param("pizzaId")
 	id, err := strconv.Atoi(pizzaId)
 	helper.ErrorPanic(err)
-	updatePizzasRequest.Id = id
+	updatePizzasRequest.ID = uint(id)
 
 	controller.pizzasService.Update(updatePizzasRequest)
 
@@ -89,7 +89,7 @@ func (controller *PizzasController) Delete(ctx *gin.Context) {
 	pizzaId := ctx.Param("pizzaId")
 	id, err := strconv.Atoi(pizzaId)
 	helper.ErrorPanic(err)
-	controller.pizzasService.Delete(id)
+	controller.pizzasService.Delete(uint(id))
 
 	webResponse := response.Response{
 		Code:   http.StatusOK,
@@ -114,7 +114,7 @@ func (controller *PizzasController) FindById(ctx *gin.Context) {
 	id, err := strconv.Atoi(pizzaId)
 	helper.ErrorPanic(err)
 
-	pizzaResponse := controller.pizzasService.FindById(id)
+	pizzaResponse := controller.pizzasService.FindById(uint(id))
 
 	webResponse := response.Response{
 		Code:   http.StatusOK,
